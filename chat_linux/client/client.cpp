@@ -11,9 +11,9 @@
 #include <ctype.h>
 #include <signal.h>
 #include "../include/Node.h"
+#include "../include/network.h"
 
 #define MAX 1024
-typedef  const struct sockaddr* SA;
 
 void* thread_send(void* ptr)
 {
@@ -51,7 +51,7 @@ void* thread_read(void* ptr)
 	pthread_exit(NULL);
 }
 
-int main(int argc,char *argv[])
+int main(int argc,char **argv)
 {
         if(argc <= 1)
 	    std::cout << "pleace input the server IP and port..." << std::endl;
@@ -60,7 +60,6 @@ int main(int argc,char *argv[])
 	    std::cout << "server IP is "<<argv[1] <<std::endl;
 	    std::cout << "server port is "<<argv[2] <<std::endl;
 	}
-	short int port = *argv[2];
 	struct sockaddr_in servaddr;
 	int sock_fd;
 	pthread_t tid[2];
@@ -70,17 +69,20 @@ int main(int argc,char *argv[])
 
 	bzero(&servaddr,sizeof(servaddr));
 	servaddr.sin_family=AF_INET;
-	servaddr.sin_port=htons(port);
+	servaddr.sin_port=htons(atoi(argv[2]));
 	
-	if(inet_pton(sock_fd, argv[1], &servaddr.sin_addr) <= 0)
+  	if(inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0) 
 	   std::cout<<"inet_pton error for "<< argv[1] << std::endl;
 
 	if( (sock_fd=socket(AF_INET,SOCK_STREAM,0)) < 0 )
 	   std::cout<< "socket error"<< std::endl;
 
-	if(connect(sock_fd,(SA) &servaddr,sizeof(servaddr)) < 0)
+	if(connect(sock_fd,(SA*) &servaddr,sizeof(servaddr)) < 0)
+	{
 	   std::cout<< "connect error"<< std::endl;
-
+	   return(-1);
+	}
+	std::cout<<"connect success ..." <<std::endl;
 	Node head;
 	head.sockfd=sock_fd;
 

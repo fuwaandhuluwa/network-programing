@@ -8,5 +8,12 @@
 #include <arpa/inet.h>       /*inet_pton   inet_ntop*/
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>       /*sszie_t...*/
+#include <unistd.h>          /*fork*/
+#include <sys/errno.h>       /*errno*/
+#include <stdlib.h>          /*atoi*/
+
+
+typedef struct sockaddr SA;
 
 #endif
