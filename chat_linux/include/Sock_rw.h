@@ -4,7 +4,7 @@
 
 #include "network.h"
 
-ssize_t readn(nt filedes, void * buff, size_t nbytes);
+ssize_t readn(int filedes, void * buff, size_t nbytes);
 
 ssize_t writen(int filedes, const void * buff, size_t nbytes);
 

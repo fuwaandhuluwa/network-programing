@@ -12,8 +12,12 @@
 #include <unistd.h>          /*fork*/
 #include <sys/errno.h>       /*errno*/
 #include <stdlib.h>          /*atoi*/
+#include <signal.h>          /*signal*/
+#include <sys/wait.h>
 
 
 typedef struct sockaddr SA;
+
+static int MAX = 1024;
 
 #endif

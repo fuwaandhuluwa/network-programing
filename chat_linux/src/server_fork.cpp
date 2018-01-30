@@ -1,6 +1,8 @@
 #include "../include/network.h"
 #include "../include/Sock_ntop.h"
+#include "../include/str_echo.h"
 #include <iostream>
+#include "../include/sig_chld.h"
 
 #define LISTENQ 5 
 
@@ -40,6 +42,7 @@ int main(int argc, char **argv)
 	std::cout << "listen error : " << strerror(errno) << std::endl;
 	return(-1);
   }
+  signal(SIGCHLD,sig_chld); 
   while(1)
   {
 	len = sizeof(cliaddr);
@@ -54,6 +57,7 @@ int main(int argc, char **argv)
 	   close(listenfd);
 	   std::cout<<"child process is running..." <<std::endl;
   	   std::cout << "connect from IP : " << inet_ntop(AF_INET,&cliaddr.sin_addr,buf,sizeof(buf))<<" : "<< ntohs(cliaddr.sin_port) << std::endl;
+	   str_echo(connfd);	   
 	   close(connfd);
 	   exit(0);
   	}	
