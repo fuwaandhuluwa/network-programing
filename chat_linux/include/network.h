@@ -14,6 +14,8 @@
 #include <stdlib.h>          /*atoi*/
 #include <signal.h>          /*signal*/
 #include <sys/wait.h>
+#include <sys/select.h>      /*select*/
+#include <sys/time.h>        /*struct timeval*/
 
 
 typedef struct sockaddr SA;

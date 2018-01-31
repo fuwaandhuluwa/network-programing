@@ -1,8 +1,8 @@
-#include "../include/network.h"
-#include "../include/Sock_ntop.h"
-#include "../include/str_echo.h"
+#include "../../include/network.h"
+#include "../../include/Sock_ntop.h"
+#include "../../include/str_echo.h"
 #include <iostream>
-#include "../include/sig_chld.h"
+#include "../../include/sig_chld.h"
 
 #define LISTENQ 5 
 

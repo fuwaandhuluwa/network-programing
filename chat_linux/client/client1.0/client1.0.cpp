@@ -10,8 +10,8 @@
 #include <arpa/inet.h>
 #include <ctype.h>
 #include <signal.h>
-#include "../include/Node.h"
-#include "../include/network.h"
+#include "../../include/Node.h"
+#include "../../include/network.h"
 
 #define MAX 1024
 
